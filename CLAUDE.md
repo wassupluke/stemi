@@ -18,9 +18,9 @@ There is no lint script. Vitest is configured inside `vite.config.js` (jsdom env
 
 ## Deployment constraints (GitHub Pages)
 
-Deployed as a **project page** at `https://wassupluke.com/six-second-stemi/` via the GitHub Actions workflow (`.github/workflows/deploy.yml`: test → build → publish `dist/` on push to `main`).
+Deployed as a **project page** at `https://wassupluke.com/stemi/` via the GitHub Actions workflow (`.github/workflows/deploy.yml`: test → build → publish `dist/` on push to `main`).
 
-- `vite.config.js` sets `base: '/six-second-stemi/'` — keep it; assets resolve under the subpath.
+- `vite.config.js` sets `base: '/stemi/'` — keep it; assets resolve under the subpath.
 - **Never add a `CNAME` file** — the user site (`wassupluke.github.io`) owns the `wassupluke.com` apex; a project CNAME would break user-site routing.
 
 ## Architecture

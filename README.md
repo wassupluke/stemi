@@ -12,13 +12,13 @@ Static build, no backend, no runtime network — safe under isolated/proxied net
 
 This repo publishes as a **project page** under the account's user site
 (`wassupluke.github.io`, custom domain `wassupluke.com`), so the live URL is
-`https://wassupluke.com/six-second-stemi/`.
+`https://wassupluke.com/stemi/`.
 
 1. Repo Settings → Pages → Source: **GitHub Actions** (branch/"legacy" mode
    cannot run `vite build`, so it can't serve this app).
 2. Push to `main`; the `Deploy to GitHub Pages` workflow tests, builds, and
    publishes `dist/`.
-3. `vite.config.js` uses `base: '/six-second-stemi/'` so assets resolve under
+3. `vite.config.js` uses `base: '/stemi/'` so assets resolve under
    the project subpath. There is intentionally **no `CNAME`** here — the user
    site (`wassupluke.github.io`) owns `wassupluke.com`; a project CNAME would
    claim the apex and break the user-site routing.
