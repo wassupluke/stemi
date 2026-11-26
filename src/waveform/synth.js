@@ -1,7 +1,6 @@
 import { NORMAL_LEADS, DIAGNOSIS_TEMPLATES, R_BOOST } from '../data/templates'
 import { leadPoints } from './lead'
 import { beatWidthPx } from './beat'
-import { jitterMorphology } from './jitter'
 
 export function pointsToPath(points) {
   if (points.length === 0) return ''
@@ -42,9 +41,7 @@ export function synthLead(caseObj, lead, { baselineY, minWidthPx }) {
   if (!Number.isFinite(minWidthPx)) {
     throw new Error(`synthLead: minWidthPx must be a number, got ${minWidthPx}`)
   }
-  const base = leadMorphology(caseObj.diagnosis, lead)
-  // Cases without a seed (tests, raw case data) render the exact template.
-  const morph = caseObj.seed == null ? base : jitterMorphology(base, caseObj.seed, lead)
+  const morph = leadMorphology(caseObj.diagnosis, lead)
   const beats = Math.max(4, Math.ceil(minWidthPx / beatWidthPx(caseObj.bpm)))
   const { points, width } = leadPoints(morph, { bpm: caseObj.bpm, baselineY, beats })
   return { d: pointsToPath(points), width }

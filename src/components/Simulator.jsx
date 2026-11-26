@@ -3,7 +3,6 @@ import { useOptions } from '../hooks/useOptions'
 import { useSession } from '../hooks/useSession'
 import { useGame } from '../hooks/useGame'
 import { CASES, rollBpm } from '../data/cases'
-import { rollSeed } from '../waveform/jitter'
 import { DIAGNOSIS_IDS } from '../data/diagnoses'
 import { TitleBar } from './TitleBar'
 import { EcgScreen } from './EcgScreen'
@@ -41,7 +40,7 @@ export function Simulator() {
 
   const learnCase = learn[learnIndex] ?? null
   const shownCase = mode === 'game' ? game.currentCase : learnCase
-  // Roll a concrete heart rate and waveform-jitter seed once per dealt/browsed case. useMemo's
+  // Roll a concrete heart rate once per dealt/browsed case. useMemo's
   // single-slot cache re-rolls whenever shownCase changes (every GAME deal,
   // every LEARN page-turn — including returning to a card) but keeps the
   // rate stable across re-renders while a case is on screen. Stability leans
@@ -49,7 +48,7 @@ export function Simulator() {
   // concurrent features — if this app ever adopts useTransition/Suspense,
   // move the roll into state keyed on shownCase identity.
   const dealtCase = useMemo(
-    () => shownCase && { ...shownCase, bpm: rollBpm(shownCase), seed: rollSeed() },
+    () => shownCase && { ...shownCase, bpm: rollBpm(shownCase) },
     [shownCase]
   )
   const overlayVariant =
